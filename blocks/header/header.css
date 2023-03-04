@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  justtfy-content: flex-start;
+  padding-left: 1.68rem;
+  align-items: center;
+  width: 55rem;
+  height: 4.625rem;
+}
+
+@media screen and (min-width: 1325px) {
+  .header {
+    padding-left: 0;
+  }
+}
