@@ -17,6 +17,17 @@
 
 /* profile imports */
 @import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__avatar-image/profile__avatar-image.css");
+@import url("../blocks/profile/__header/profile__header.css");
+@import url("../blocks/profile/__title/profile__title.css");
+@import url("../blocks/profile/__eddit-button/profile__eddit-button.css");
+@import url("../blocks/profile/__subtitle/profile__subtitle.css");
+@import url("../blocks/profile/__subtitle/_mobile/profile__subtitle_mobile.css");
+@import url("../blocks/profile/__add-button/profile__add-button.css");
+
+
 
 /* card imports */
 @import url("../blocks/card/card.css");

@@ -1,0 +1,17 @@
+.profile__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: 3.12rem;
+  width: 100%;
+}
+
+@media screen and (min-width: 648px) {
+  .profile__header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+  }
+}
+

@@ -1,0 +1,14 @@
+.profile__eddit-button {
+  all: unset;
+  width: 1.12rem;
+  height: 1.12rem;
+  border: 1px solid #fff;
+  text-align: center;
+  transition: all 150ms ease-in;
+  cursor: pointer;
+}
+
+.profile__eddit-button:hover {
+  opacity: .6;
+}
+
