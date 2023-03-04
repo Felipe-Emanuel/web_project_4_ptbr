@@ -1,0 +1,23 @@
+/* normalize imports */
+@import url("../vendor/normalize.css");
+
+/* root imports */
+@import url("../blocks/root/root.css");
+
+/* content imports */
+@import url("../blocks/content/content.css");
+
+/* page imports */
+@import url("../blocks/page/page.css");
+
+/* header imports */
+@import url("../blocks/header/header.css");
+
+/* profile imports */
+@import url("../blocks/profile/profile.css");
+
+/* card imports */
+@import url("../blocks/card/card.css");
+
+/* footer imports */
+@import url("../blocks/footer/footer.css");
