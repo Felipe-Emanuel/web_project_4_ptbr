@@ -1,6 +1,11 @@
 .page {
-  max-width: 1280px;
-  height: 100vh;
+  position: relative;
+  padding: 0 1rem;
   margin: auto;
-  padding: 0 1.18rem;
+}
+
+@media screen and (min-width: 1280px) {
+  .page {
+    padding: 0 12.5rem;
+  }
 }

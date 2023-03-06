@@ -1,0 +1,7 @@
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 1.3rem;
+  background-color: #fff;
+  color: #000;
+}

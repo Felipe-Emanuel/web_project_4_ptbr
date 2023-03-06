@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./index.js"></script>
     <title>EUA Afora</title>
   </head>
   <body>
@@ -19,6 +18,29 @@
           />
           <img alt="" src="./images/Line.svg" class="header__line" />
         </nav>
+        <div class="modal-edit">
+          <form class="modal-edit__form">
+            <h2 class="modal-edit__form-title">Editar Perfil</h2>
+            <button type="button" class="modal-edit__close-form">
+              &#x2715;
+            </button>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="modal-edit__form-input modal-edit__form-input-name"
+            />
+            <input
+              type="text"
+              name="about"
+              id="about"
+              class="modal-edit__form-input modal-edit__form-input-about"
+            />
+            <button type="submit" class="modal-edit__form-submit">
+              Salvar
+            </button>
+          </form>
+        </div>
         <section class="profile">
           <div class="profile__info">
             <div class="profile__avatar">
@@ -28,7 +50,7 @@
                 alt="Imagem perfil do usuário"
               />
             </div>
-            <div >
+            <div>
               <div class="profile__header">
                 <h1 class="profile__title">Jacques Cousteau</h1>
                 <button class="profile__eddit-button">
@@ -38,13 +60,107 @@
                   />
                 </button>
               </div>
-                <h2 class="profile__subtitle">Explorar</h2>
+              <h2 class="profile__subtitle">Explorar</h2>
             </div>
-            <h2 class="profile__subtitle_mobile">Explorar</h2>
+            <h2 class="profile__subtitle profile__subtitle_mobile">Explorar</h2>
           </div>
           <button class="profile__add-button">&#43;</button>
         </section>
+        <section class="cards">
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1088404-unsplash.jpg"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Vale do Yosemite</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1404681-unsplash.png"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Lago Louise</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1556355-unsplash.png"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Montanhas Care...</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1404681-unsplash (1).png"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Latemar</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1556355-unsplash (1).png"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Vanoise Nationa...</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+          <div class="card">
+            <img
+              src="./images/cardsImages/kirill-pershin-1088404-unsplash.png"
+              alt="card1"
+              class="card__image"
+            />
+            <div class="card__info">
+              <h2 class="card__title">Lago di Braies</h2>
+              <img
+                src="./images/Heart.svg"
+                alt="Coração simbolizando o curtir do card"
+                class="card__like-button"
+              />
+            </div>
+          </div>
+        </section>
+        <footer class="footer">&copy; 2021 Around The U.S.</footer>
       </div>
     </main>
+    <script src="./index.js"></script>
   </body>
 </html>

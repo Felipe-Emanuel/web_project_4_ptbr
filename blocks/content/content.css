@@ -7,3 +7,9 @@
     overflow: hidden;
     font-family: "Inter", sans-serif;
   }
+
+  @media screen and (min-width: 1206px) {
+    .content {
+      max-width: 1280px;
+    }
+  }

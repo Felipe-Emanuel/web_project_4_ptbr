@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 1.64rem;
+
 }
 
 @media screen and (min-width: 648px) {

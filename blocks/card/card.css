@@ -1,0 +1,10 @@
+.card {
+  max-width: 17.62rem;
+  height: 22.56rem;
+  margin: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.625rem;
+}
+

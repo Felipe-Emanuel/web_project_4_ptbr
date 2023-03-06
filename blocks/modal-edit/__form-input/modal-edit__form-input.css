@@ -1,0 +1,17 @@
+.modal-edit__form-input {
+  width: 100%;
+  heigth: 1.8rem;
+  font-weight: 400;
+  font-size: 0.87rem;
+  line-heigth: 1rem;
+  padding: 0.8rem 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-edit__form-input {
+    heigth: 1.6rem;
+  }
+}
