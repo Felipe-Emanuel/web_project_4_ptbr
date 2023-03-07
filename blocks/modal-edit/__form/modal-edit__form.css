@@ -7,10 +7,10 @@
   height: 20rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   items-align: center;
   border-radius: 0.6rem;
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 @media screen and (min-width: 648px) {

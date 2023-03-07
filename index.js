@@ -1,8 +1,12 @@
 const modalEditContent = document.querySelector(".modal-edit");
 const closeForm = modalEditContent.querySelector(".modal-edit__close-form");
 const openForm = document.querySelector(".profile__eddit-button");
-const placeholderName = modalEditContent.querySelector(".modal-edit__form-input-name");
-const placeholderAbout = modalEditContent.querySelector(".modal-edit__form-input-about");
+const placeholderName = modalEditContent.querySelector(
+  ".modal-edit__form-input-name"
+);
+const placeholderAbout = modalEditContent.querySelector(
+  ".modal-edit__form-input-about"
+);
 const submitButton = document.querySelector(".modal-edit__form-submit");
 
 const hideForm = () => {
@@ -28,9 +32,18 @@ const handleProfileFormSubmit = (e) => {
   profileTitle.textContent = placeholderName.value;
   profileSubTitle.textContent = placeholderAbout.value;
 
-  hideForm()
+  hideForm();
+};
+
+const updateDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+  const dateFooter = document.querySelector(".footer");
+
+  dateFooter.innerHTML = `&copy; ${year} Around The U.S.`;
 };
 
 closeForm.addEventListener("click", hideForm);
 openForm.addEventListener("click", showForm);
 submitButton.addEventListener("click", handleProfileFormSubmit);
+updateDate()
