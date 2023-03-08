@@ -38,12 +38,12 @@ const handleProfileFormSubmit = (e) => {
 const updateDate = () => {
   const date = new Date();
   const year = date.getFullYear();
-  const dateFooter = document.querySelector(".footer");
+  const dateFooter = document.querySelector(".year");
 
-  dateFooter.innerHTML = `&copy; ${year} Around The U.S.`;
+  dateFooter.textContent = year;
 };
 
 closeForm.addEventListener("click", hideForm);
 openForm.addEventListener("click", showForm);
 submitButton.addEventListener("click", handleProfileFormSubmit);
-updateDate()
+updateDate();
