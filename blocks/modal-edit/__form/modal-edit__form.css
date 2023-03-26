@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  items-align: center;
   border-radius: 0.6rem;
   padding: 0 2rem;
 }
