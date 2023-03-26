@@ -1,7 +1,7 @@
 .card__like-button {
   position: relative;
   right: 2rem;
-  heigth: 1.18rem;
+  height: 1.18rem;
   transition: all 150ms ease-in;
   cursor: pointer;
 }

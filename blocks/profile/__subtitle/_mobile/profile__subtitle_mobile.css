@@ -1,4 +1,4 @@
-.profile__subtitle_mobile{
+.profile__subtitle_mobile {
   display: flex;
   font-size: 0.87rem;
   font-weight: 400;
@@ -9,6 +9,6 @@
 
 @media screen and (min-width: 648px) {
   .profile__subtitle_mobile {
-    display: none
+    display: none;
   }
 }

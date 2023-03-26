@@ -10,11 +10,10 @@
   transition: all 150ms ease-in;
   cursor: pointer;
   font-size: 2rem;
-
 }
 
 .profile__add-button:hover {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 648px) {
@@ -24,4 +23,3 @@
     padding: 0;
   }
 }
-
