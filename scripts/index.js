@@ -59,7 +59,7 @@ const showForm = (e) => {
 
   isModalOpening(modalEditContent)
 
-  e.target.getAttribute("id") == "eddit-button"
+  e.target.getAttribute("id") == "edditBbutton"
     ? ((placeholderName.value = profileTitle.textContent),
       (placeholderAboutAndUrl.value = profileSubTitle.textContent),
       placeholderName.setAttribute("placeholder", "Insira seu nome"),

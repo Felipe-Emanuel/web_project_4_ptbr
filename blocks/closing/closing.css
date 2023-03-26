@@ -1,5 +1,5 @@
 .closing {
-  animation: closing 0.5s
+  animation: closing 0.5s;
 }
 
 @keyframes closing {
