@@ -17,9 +17,23 @@
           />
           <img alt="linha de separação do cabeçalho do site" src="./images/Line.svg" class="header__line" />
         </nav>
+        <div class="showedImage">
+          <div class="showedImage__content">
+            <button type="button" class="showedImage__close-image">
+              &#x2715;
+            </button>
+            <img
+              src=""
+              alt="Nome do lugar da imagem"
+              class="showedImage__image"
+            />
+            <span class="showedImage__title"></span>
+          </div>
+        </div>
         <div class="modal-edit">
           <form class="modal-edit__form">
-            <h2 class="modal-edit__form-title">Editar Perfil</h2>
+            <span class="modal-edit__error"></span>
+            <h2 class="modal-edit__form-title"></h2>
             <button type="button" class="modal-edit__close-form">
               &#x2715;
             </button>
@@ -52,8 +66,9 @@
             <div>
               <div class="profile__header">
                 <h1 class="profile__title">Jacques Cousteau</h1>
-                <button class="profile__eddit-button">
+                <button class="profile__eddit-button" id="eddit-button">
                   <img
+                    id="eddit-button"
                     src="./images/Eddit.svg"
                     alt="imagem de um lápis referenciando a possível edição dos dados"
                   />
@@ -63,102 +78,12 @@
             </div>
             <h2 class="profile__subtitle profile__subtitle_mobile">Explorar</h2>
           </div>
-          <button class="profile__add-button">&#43;</button>
+          <button class="profile__add-button" id="add-button">&#43;</button>
         </section>
-        <section class="cards">
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1088404-unsplash.jpg"
-              alt="Um rio entre árvores sob um céu diúrno e montanhas ao fundo"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Vale do Yosemite</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1404681-unsplash.png"
-              alt="Um grande lago entre montanhas"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Lago Louise</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1556355-unsplash.png"
-              alt="por do sol"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Montanhas Care...</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1404681-unsplash(1).png"
-              alt="Montanhas sob um céu noturno repleto de estrelas"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Latemar</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1556355-unsplash(1).png"
-              alt="Grande lago refletindo as ontas ao seu redor"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Vanoise Nationa...</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="./images/cardsImages/kirill-pershin-1088404-unsplash.png"
-              alt="canoas numa lagoa próxima à uma escada para uma casa de madeira com montanhas no fundo"
-              class="card__image"
-            />
-            <div class="card__info">
-              <h2 class="card__title">Lago di Braies</h2>
-              <img
-                src="./images/Heart.svg"
-                alt="Coração simbolizando o curtir do card"
-                class="card__like-button"
-              />
-            </div>
-          </div>
+        <section id="cards-container" class="cards">
         </section>
         <footer class="footer">&copy; <span class='year'>2021</span> Around The U.S.</footer>
     </main>
-    <script src="./index.js"></script>
+    <script type='module' src="./scripts/index.js"></script>
   </body>
 </html>

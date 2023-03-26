@@ -1,0 +1,12 @@
+.closing {
+  animation: closing 0.5s
+}
+
+@keyframes closing {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

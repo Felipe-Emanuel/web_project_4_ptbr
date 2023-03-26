@@ -1,0 +1,28 @@
+.showedImage__close-image {
+  position: absolute;
+  top: -3rem;
+  right: 0rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 900;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 150ms ease-in;
+}
+
+.showedImage__close-image:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 768px) {
+  .showedImage__close-image {
+    top: -2.5rem;
+    right: -2.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 2rem;
+  }
+}

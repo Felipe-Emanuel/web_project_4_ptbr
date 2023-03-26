@@ -1,4 +1,6 @@
 .card__title {
+  position: relative;
+  max-width: 80%;
   font-size: 1.5rem;
   font-heigth: 10.8rem;
   font-weight: 900;

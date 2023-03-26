@@ -7,7 +7,6 @@
   margin: auto;
 }
 
-
 @media screen and (min-width: 648px) {
   .profile__subtitle_mobile {
     display: none
