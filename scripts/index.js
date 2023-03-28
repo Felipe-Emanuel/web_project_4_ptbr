@@ -2,8 +2,12 @@ import { renderCards, initialCards } from "./renderCards.js";
 
 const modalEditContent = document.querySelector(".modal-edit");
 const closeForm = modalEditContent.querySelector(".modal-edit__close-form");
-const placeholderName = modalEditContent.querySelector(".modal-edit__form-input-name");
-const placeholderAboutAndUrl = modalEditContent.querySelector(".modal-edit__form-input-about");
+const placeholderName = modalEditContent.querySelector(
+  ".modal-edit__form-input-name"
+);
+const placeholderAboutAndUrl = modalEditContent.querySelector(
+  ".modal-edit__form-input-about"
+);
 const modalTitle = modalEditContent.querySelector(".modal-edit__form-title");
 const openEditForm = document.querySelector(".profile__eddit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -11,7 +15,9 @@ const submitButton = document.querySelector(".modal-edit__form-submit");
 const cards = document.querySelector(".cards");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubTitle = document.querySelector(".profile__subtitle");
-const profileMobileSubTitle = document.querySelector(".profile__subtitle_mobile");
+const profileMobileSubTitle = document.querySelector(
+  ".profile__subtitle_mobile"
+);
 const error = document.querySelector(".modal-edit__error");
 const showedImage = document.querySelector(".showedImage");
 const closeShowedImage = showedImage.querySelector(".showedImage__close-image");
@@ -22,17 +28,17 @@ const isModalOpening = (element) => {
   element.classList.remove("closing");
   element.classList.add("opening");
   element.style.display = "flex";
+};
+
+function capitalizeName(str) {
+  return str
+    .trim()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 }
 
-function capitalizeName(value) {
-  return value.value
-    .replace(/\b\w/g, (letter) => {
-      return letter.toUpperCase();
-    })
-    .trim();
-}
-
-const hideShowedImage = () => {
+const closeModalEditContent = () => {
   showedImage.classList.add("closing");
   showedImage.classList.remove("opening");
 
@@ -43,73 +49,103 @@ const hideShowedImage = () => {
   }, 450);
 };
 
-const hideForm = () => {
+const closeImageModal = () => {
   modalEditContent.classList.add("closing");
   modalEditContent.classList.remove("opening");
 
   setTimeout(() => {
     modalEditContent.style.display = "none";
   }, 450);
-
 };
 
-const showForm = (e) => {
+const setPlaceHoldersContent = (newProfileTitle, newProfileSubTitle) => {
+  const defaultNewProfileTitle = newProfileTitle ?? "";
+  const defaultNewProfileSubTitle = newProfileSubTitle ?? "";
+
+  placeholderName.value = defaultNewProfileTitle;
+  placeholderAboutAndUrl.value = defaultNewProfileSubTitle;
+};
+
+const setPlaceHoldersAtribute = (
+  newPlaceholderTitleField,
+  newPlaceholderSubTitleField
+) => {
+  const defaultPlaceholderSubTitleField =
+    newPlaceholderSubTitleField ?? "Explorar";
+
+  placeholderName.setAttribute("placeholder", newPlaceholderTitleField);
+  placeholderAboutAndUrl.setAttribute(
+    "placeholder",
+    defaultPlaceholderSubTitleField
+  );
+};
+
+const setModalTitle = (newModalTitle) =>
+  (modalTitle.textContent = newModalTitle);
+
+const checkButtonClickedByTargetId = (buttonTargetId) => {
+  buttonTargetId === "addButton"
+    ? (setPlaceHoldersContent(),
+      setPlaceHoldersAtribute("Nome do lugar", "URL da imagem"),
+      setModalTitle("Novo Lugar"))
+    : (setPlaceHoldersContent(
+        profileTitle.textContent,
+        profileSubTitle.textContent
+      ),
+      setPlaceHoldersAtribute("Insira seu nome"),
+      setModalTitle("Editar Perfil"));
+};
+
+const showModalEditContent = (e) => {
+  const targetId = e.target.getAttribute("id");
+
   error.textContent = "";
   modalTitle.textContent = "";
 
-  isModalOpening(modalEditContent)
+  isModalOpening(modalEditContent);
 
-  e.target.getAttribute("id") == "edditBbutton"
-    ? ((placeholderName.value = profileTitle.textContent),
-      (placeholderAboutAndUrl.value = profileSubTitle.textContent),
-      placeholderName.setAttribute("placeholder", "Insira seu nome"),
-      placeholderAboutAndUrl.setAttribute("placeholder", "Explorar"),
-      (modalTitle.textContent = "Editar Perfil"))
-    : ((placeholderName.value = ""),
-      (placeholderAboutAndUrl.value = ""),
-      placeholderName.setAttribute("placeholder", "Nome do lugar"),
-      placeholderAboutAndUrl.setAttribute("placeholder", "URL da imagem"),
-      (modalTitle.textContent = "Novo Lugar"));
+  checkButtonClickedByTargetId(targetId);
+};
 
-  modalEditContent.classList.add("modal-edit__hidden");
+const setNewName = () => {
+  profileTitle.textContent = capitalizeName(placeholderName.value);
+  profileSubTitle.textContent = capitalizeName(placeholderAboutAndUrl.value);
+  profileMobileSubTitle.textContent = capitalizeName(
+    placeholderAboutAndUrl.value
+  );
+};
 
+const setNewCard = (name, link) => {
+  const id = initialCards.length + 1;
+  const newCard = {
+    id,
+    name,
+    link,
+  };
+
+  initialCards.unshift(newCard);
+
+  cards.innerHTML = renderCards();
+  toggleLikeOnCards();
+  deleteCard();
+  showShowedImage();
 };
 
 const handleProfileFormSubmit = (e) => {
   e.preventDefault();
 
-  const setNewName = () => {
-  profileTitle.textContent = capitalizeName(placeholderName);
-  profileSubTitle.textContent = capitalizeName(placeholderAboutAndUrl);
-  profileMobileSubTitle.textContent = capitalizeName(placeholderAboutAndUrl);
-  };
-
-  const setNewCard = (name, link) => {
-    const id = initialCards.length +1;
-    const newCard = {
-      id,
-      name,
-      link
-    }
-
-    initialCards.unshift(newCard);
-
-    cards.innerHTML = renderCards();
-    handleFillHeart();
-    handleDeleteCard();
-    showShowedImage();
-  };
+  const placeholder = placeholderName.getAttribute("placeholder");
 
   if (
     placeholderName &&
-    placeholderAboutAndUrl.value !== "" &&
-    placeholderName.value !== ""
+    placeholderAboutAndUrl.value &&
+    placeholderName.value
   ) {
-    placeholderName.getAttribute("placeholder") == "Insira seu nome"
+    placeholder === "Insira seu nome"
       ? setNewName()
       : setNewCard(placeholderName.value, placeholderAboutAndUrl.value);
 
-    hideForm();
+    closeImageModal();
     error.textContent = "";
     return;
   }
@@ -117,65 +153,60 @@ const handleProfileFormSubmit = (e) => {
   return (error.textContent = "Os campos não podem estar em branco!");
 };
 
-const handleFillHeart = () => {
-  const hearts = document.querySelectorAll(".card__like-button");
+const handleChoiseImage = (image) => {
+  const id = image.getAttribute("data-index");
 
-  hearts.forEach((heart) => {
-    heart.addEventListener("click", () => {
-      const attribute = heart.getAttribute("src");
+  imageShowed.setAttribute("src", initialCards[id].link);
+  imageShowed.setAttribute("alt", `Imagem de ${initialCards[id].name}`);
+  imageShowedTitle.textContent = initialCards[id].name;
 
-      if (attribute === "./images/Heart.svg") {
-        heart.setAttribute("src", "./images/filledHeart.svg");
-        return;
-      }
-
-      heart.setAttribute("src", "./images/Heart.svg");
-    });
-  });
+  isModalOpening(showedImage);
 };
 
-const handleDeleteCard = () => {
-  const trashIcon = document.querySelectorAll(".card__trash-button");
+const handleDelete = (e) => {
+  const id = e.currentTarget.parentNode.getAttribute("id");
+  const index = initialCards.findIndex((item) => item.id == id);
 
-  const handleDelet = (e) => {
-    const id = e.currentTarget.parentNode.getAttribute("id")
-    const index = initialCards.findIndex((item) => item.id == id);
+  if (index !== -1) {
+    initialCards.splice(index, 1);
+    e.currentTarget.parentNode.remove();
 
-    if (index !== -1) {
-      initialCards.splice(index, 1);
-      e.currentTarget.parentNode.remove();
-
-      cards.innerHTML = renderCards();
-      handleFillHeart();
-      handleDeleteCard();
-      showShowedImage();
-    }
-  };
-
-  trashIcon.forEach((trashIcon) => {
-    trashIcon.addEventListener("click", handleDelet);
-  });
-}
+    cards.innerHTML = renderCards();
+    toggleLikeOnCards();
+    deleteCard();
+    showShowedImage();
+  }
+};
 
 const showShowedImage = () => {
   const imageCard = document.querySelectorAll(".card__image");
 
   imageCard.forEach((image) => {
-    image.addEventListener("click", () => {
+    image.addEventListener("click", () => handleChoiseImage(image));
+  });
+};
 
-      const id = image.getAttribute("data-index")
-      imageShowed.setAttribute("src", initialCards[id].link);
-      imageShowed.setAttribute("alt", `Imagem de ${initialCards[id].name}`);
-      imageShowedTitle.textContent = initialCards[id].name;
+const deleteCard = () => {
+  const trashIcon = document.querySelectorAll(".card__trash-button");
 
-      isModalOpening(showedImage)
-    });
+  trashIcon.forEach((trashIcon) => {
+    trashIcon.addEventListener("click", handleDelete);
+  });
+};
+
+const handleLike = (heart) => heart.classList.toggle("cardlike-button__liked");
+
+const toggleLikeOnCards = () => {
+  const hearts = document.querySelectorAll(".cardlike-button");
+
+  hearts.forEach((heart) => {
+    heart.addEventListener("click", () => handleLike(heart));
   });
 };
 
 const setMobileSubtitle = () => {
-  return profileMobileSubTitle.textContent = profileSubTitle.textContent
-}
+  return (profileMobileSubTitle.textContent = profileSubTitle.textContent);
+};
 
 const updateDate = () => {
   const date = new Date();
@@ -185,14 +216,14 @@ const updateDate = () => {
   dateFooter.textContent = year;
 };
 
-closeForm.addEventListener("click", hideForm);
-openEditForm.addEventListener("click", showForm);
-closeShowedImage.addEventListener("click", hideShowedImage);
-addNewCardButton.addEventListener("click", showForm);
+closeForm.addEventListener("click", closeImageModal);
+openEditForm.addEventListener("click", showModalEditContent);
+closeShowedImage.addEventListener("click", closeModalEditContent);
+addNewCardButton.addEventListener("click", showModalEditContent);
 submitButton.addEventListener("click", handleProfileFormSubmit);
 cards.innerHTML = renderCards();
 updateDate();
-handleFillHeart();
-handleDeleteCard();
+toggleLikeOnCards();
+deleteCard();
 showShowedImage();
 setMobileSubtitle();

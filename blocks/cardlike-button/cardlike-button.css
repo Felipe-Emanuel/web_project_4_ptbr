@@ -1,0 +1,15 @@
+.cardlike-button {
+  position: relative;
+  background-image: url(/images/Heart.svg);
+  background-repeat: no-repeat;
+  background-position: top;
+  right: 2rem;
+  width: 1.5rem;
+  height: 1.18rem;
+  transition: all 150ms ease-in;
+  cursor: pointer;
+}
+
+.cardlike-button:hover {
+  opacity: 0.6;
+}

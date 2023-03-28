@@ -50,17 +50,13 @@ export const renderCards = () => {
           data-index=${index}
         />
         <img
-          src='./images/trashIcon.svg'
+          src="./images/trashIcon.svg"
           alt="deletar card"
           class="card__trash-button"
         />
         <div class="card__info">
           <h2 class="card__title">${card.name}</h2>
-          <img
-            src="./images/Heart.svg"
-            alt="Coração simbolizando o curtir do card"
-            class="card__like-button"
-          />
+          <div class="cardlike-button" /></div>
         </div>
       </div>`
       );
