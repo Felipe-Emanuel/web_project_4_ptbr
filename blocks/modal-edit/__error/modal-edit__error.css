@@ -1,6 +1,5 @@
 .modal-edit__error {
   font-weight: semi-bold;
   font-size: 0.8rem;
-  color: #ba4343;
-  text-align: center;
+  color: red;
 }

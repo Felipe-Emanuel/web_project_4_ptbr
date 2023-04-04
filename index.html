@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./images/logo/Vector.svg">
     <link rel="stylesheet" href="./pages/index.css" />
     <title>EUA Afora</title>
   </head>
@@ -21,7 +22,7 @@
           class="header__line"
         />
       </nav>
-      <div class="showedImage">
+      <div class="showedImage" id="showedImage">
         <div class="showedImage__content">
           <button type="button" class="showedImage__close-image">
             &#x2715;
@@ -34,9 +35,8 @@
           <span class="showedImage__title"></span>
         </div>
       </div>
-      <div class="modal-edit">
-        <form class="modal-edit__form">
-          <span class="modal-edit__error"></span>
+      <div class="modal-edit" id="modal-edit">
+        <form class="modal-edit__form" >
           <h2 class="modal-edit__form-title"></h2>
           <button type="button" class="modal-edit__close-form">&#x2715;</button>
           <input
@@ -44,13 +44,17 @@
             name="name"
             id="name"
             class="modal-edit__form-input modal-edit__form-input-name"
+            required
           />
+          <span class="modal-edit__error name-error"></span>
           <input
             type="text"
             name="about"
             id="about"
             class="modal-edit__form-input modal-edit__form-input-about"
+            required
           />
+          <span class="modal-edit__error about-error"></span>
           <button type="submit" class="modal-edit__form-submit">Salvar</button>
         </form>
       </div>

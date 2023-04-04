@@ -1,13 +1,9 @@
+import { inputField } from "./inputField.js";
 import { renderCards, initialCards } from "./renderCards.js";
+import { enableValidation, setError, resetErrorMessage } from "./validate.js";
 
 const modalEditContent = document.querySelector(".modal-edit");
 const closeForm = modalEditContent.querySelector(".modal-edit__close-form");
-const placeholderName = modalEditContent.querySelector(
-  ".modal-edit__form-input-name"
-);
-const placeholderAboutAndUrl = modalEditContent.querySelector(
-  ".modal-edit__form-input-about"
-);
 const modalTitle = modalEditContent.querySelector(".modal-edit__form-title");
 const openEditForm = document.querySelector(".profile__eddit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -15,14 +11,16 @@ const submitButton = document.querySelector(".modal-edit__form-submit");
 const cards = document.querySelector(".cards");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubTitle = document.querySelector(".profile__subtitle");
-const profileMobileSubTitle = document.querySelector(
-  ".profile__subtitle_mobile"
-);
-const error = document.querySelector(".modal-edit__error");
+const profileMobileSubTitle = document.querySelector(".profile__subtitle_mobile");
 const showedImage = document.querySelector(".showedImage");
 const closeShowedImage = showedImage.querySelector(".showedImage__close-image");
 const imageShowed = showedImage.querySelector(".showedImage__image");
 const imageShowedTitle = document.querySelector(".showedImage__title");
+
+const inputs = {
+  name: modalEditContent.querySelector(".modal-edit__form-input-name"),
+  aboutAndUrl: modalEditContent.querySelector(".modal-edit__form-input-about"),
+};
 
 const isModalOpening = (element) => {
   element.classList.remove("closing");
@@ -30,89 +28,87 @@ const isModalOpening = (element) => {
   element.style.display = "flex";
 };
 
-function capitalizeName(str) {
+const capitalizeName = (str) => {
   return str
     .trim()
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
-}
+};
 
-const closeModalEditContent = () => {
-  showedImage.classList.add("closing");
-  showedImage.classList.remove("opening");
+const closeModal = (modal) => {
+  modal.classList.add("closing");
+  modal.classList.remove("opening");
 
   setTimeout(() => {
-    showedImage.style.display = "none";
-    imageShowed.setAttribute("src", "");
-    imageShowedTitle.textContent = "";
+    modal.style.display = "none";
   }, 450);
 };
 
-const closeImageModal = () => {
-  modalEditContent.classList.add("closing");
-  modalEditContent.classList.remove("opening");
-
-  setTimeout(() => {
-    modalEditContent.style.display = "none";
-  }, 450);
+const closeModalOnBlur = (e) => {
+  if (e.target === modalEditContent || e.target === showedImage) {
+    closeModal(e.target);
+  }
 };
 
-const setPlaceHoldersContent = (newProfileTitle, newProfileSubTitle) => {
-  const defaultNewProfileTitle = newProfileTitle ?? "";
-  const defaultNewProfileSubTitle = newProfileSubTitle ?? "";
-
-  placeholderName.value = defaultNewProfileTitle;
-  placeholderAboutAndUrl.value = defaultNewProfileSubTitle;
+const closeModalOnEsc = (e) => {
+  if (e.key === "Escape") {
+    closeModal(modalEditContent);
+    closeModal(showedImage);
+  }
 };
 
-const setPlaceHoldersAtribute = (
-  newPlaceholderTitleField,
-  newPlaceholderSubTitleField
-) => {
-  const defaultPlaceholderSubTitleField =
-    newPlaceholderSubTitleField ?? "Explorar";
-
-  placeholderName.setAttribute("placeholder", newPlaceholderTitleField);
-  placeholderAboutAndUrl.setAttribute(
-    "placeholder",
-    defaultPlaceholderSubTitleField
-  );
-};
-
-const setModalTitle = (newModalTitle) =>
-  (modalTitle.textContent = newModalTitle);
-
-const checkButtonClickedByTargetId = (buttonTargetId) => {
-  buttonTargetId === "addButton"
-    ? (setPlaceHoldersContent(),
-      setPlaceHoldersAtribute("Nome do lugar", "URL da imagem"),
-      setModalTitle("Novo Lugar"))
-    : (setPlaceHoldersContent(
-        profileTitle.textContent,
-        profileSubTitle.textContent
-      ),
-      setPlaceHoldersAtribute("Insira seu nome"),
-      setModalTitle("Editar Perfil"));
+const setPlaceholders = (title, subtitle) => {
+  inputs.name.value = title ?? "";
+  inputs.aboutAndUrl.value = subtitle ?? "";
 };
 
 const showModalEditContent = (e) => {
   const targetId = e.target.getAttribute("id");
+  const form = document.querySelector(".modal-edit__form");
+  const inputElement = form.querySelectorAll(".modal-edit__form-input");
 
-  error.textContent = "";
+  const {
+    setInputType,
+    removeInputAttribute,
+    setMinMaxLength,
+    changeTitlesByTargetId,
+    setPlaceHoldersAtribute,
+  } = inputField();
+
   modalTitle.textContent = "";
+
+  resetErrorMessage(inputElement, form);
 
   isModalOpening(modalEditContent);
 
-  checkButtonClickedByTargetId(targetId);
+  setInputType(targetId, inputs.aboutAndUrl);
+  removeInputAttribute(targetId, inputs.aboutAndUrl);
+  setMinMaxLength(targetId, inputs.aboutAndUrl, inputs.name);
+  changeTitlesByTargetId(targetId, modalTitle.textContent);
+
+  targetId === "addButton"
+    ? (setPlaceholders(),
+      setPlaceHoldersAtribute(
+        inputs.name,
+        inputs.aboutAndUrl,
+        "Nome do lugar",
+        "URL da imagem"
+      ))
+    : (setPlaceholders(profileTitle.textContent, profileSubTitle.textContent),
+      setPlaceHoldersAtribute(
+        inputs.name,
+        inputs.aboutAndUrl,
+        "Insira seu nome"
+      ));
+
+  enableValidation();
 };
 
 const setNewName = () => {
-  profileTitle.textContent = capitalizeName(placeholderName.value);
-  profileSubTitle.textContent = capitalizeName(placeholderAboutAndUrl.value);
-  profileMobileSubTitle.textContent = capitalizeName(
-    placeholderAboutAndUrl.value
-  );
+  profileTitle.textContent = capitalizeName(inputs.name.value);
+  profileSubTitle.textContent = capitalizeName(inputs.aboutAndUrl.value);
+  profileMobileSubTitle.textContent = capitalizeName(inputs.aboutAndUrl.value);
 };
 
 const setNewCard = (name, link) => {
@@ -134,23 +130,18 @@ const setNewCard = (name, link) => {
 const handleProfileFormSubmit = (e) => {
   e.preventDefault();
 
-  const placeholder = placeholderName.getAttribute("placeholder");
+  const placeholder = inputs.name.getAttribute("placeholder");
 
-  if (
-    placeholderName &&
-    placeholderAboutAndUrl.value &&
-    placeholderName.value
-  ) {
+  if (inputs.name.validity.valid && inputs.aboutAndUrl.validity.valid) {
     placeholder === "Insira seu nome"
       ? setNewName()
-      : setNewCard(placeholderName.value, placeholderAboutAndUrl.value);
+      : setNewCard(inputs.name.value, inputs.aboutAndUrl.value);
 
-    closeImageModal();
-    error.textContent = "";
+    closeModal(modalEditContent);
     return;
   }
 
-  return (error.textContent = "Os campos não podem estar em branco!");
+  return setError(modalEditContent);
 };
 
 const handleChoiseImage = (image) => {
@@ -216,12 +207,14 @@ const updateDate = () => {
   dateFooter.textContent = year;
 };
 
-closeForm.addEventListener("click", closeImageModal);
+closeForm.addEventListener("click", () => closeModal(modalEditContent));
 openEditForm.addEventListener("click", showModalEditContent);
-closeShowedImage.addEventListener("click", closeModalEditContent);
+closeShowedImage.addEventListener("click", () => closeModal(showedImage));
 addNewCardButton.addEventListener("click", showModalEditContent);
 submitButton.addEventListener("click", handleProfileFormSubmit);
 cards.innerHTML = renderCards();
+window.addEventListener("mousedown", closeModalOnBlur);
+window.addEventListener("keydown", closeModalOnEsc);
 updateDate();
 toggleLikeOnCards();
 deleteCard();
