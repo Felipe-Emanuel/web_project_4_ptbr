@@ -21,7 +21,7 @@
 @import url("../blocks/modal-edit/__form-title/modal-edit__form-title.css");
 @import url("../blocks/modal-edit/__close-form/modal-edit__close-form.css");
 @import url("../blocks/modal-edit/__form-input/modal-edit__form-input.css");
-@import url("../blocks/modal-edit/__form-input/_type/form__input_type_error.css");
+@import url("../blocks/modal-edit/__form-input/_type/modal-edit__form-input.css");
 @import url("../blocks/modal-edit/__form-submit/modal-edit__form-submit.css");
 @import url("../blocks/modal-edit/__form-submit/_inactive/modal-edit__form-submit_inactive.css");
 @import url("../blocks/modal-edit/__error/modal-edit__error.css");

@@ -41,8 +41,7 @@ export const initialCards = [
 export const renderCards = () => {
   return initialCards
     .map((card, index) => {
-      return (
-        `<div class="card" id=${card.id}>
+      return `<div class="card" id=${card.id}>
         <img
           src=${card.link}
           alt=${card.name}
@@ -58,8 +57,7 @@ export const renderCards = () => {
           <h2 class="card__title">${card.name}</h2>
           <div class="cardlike-button" /></div>
         </div>
-      </div>`
-      );
+      </div>`;
     })
     .join("");
 };

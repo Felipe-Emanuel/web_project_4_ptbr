@@ -42,7 +42,6 @@ export function inputField() {
       : setModalTitle(modalTitle, "Editar Perfil");
   };
 
-
   return {
     setInputType,
     removeInputAttribute,
@@ -52,4 +51,3 @@ export function inputField() {
     setPlaceHoldersAtribute,
   };
 }
-
