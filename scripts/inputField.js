@@ -33,8 +33,9 @@ export function inputField() {
         inputAbout.setAttribute("maxLength", 200));
   };
 
-  const setModalTitle = (modalTitle, newModalTitle) =>
-    (modalTitle = newModalTitle);
+  const setModalTitle = (modalTitle, newModalTitle) => {
+    modalTitle.textContent = newModalTitle
+  };
 
   const changeTitlesByTargetId = (targetId, modalTitle) => {
     targetId === "addButton"

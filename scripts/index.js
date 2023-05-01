@@ -1,6 +1,6 @@
 import { inputField } from "./inputField.js";
-import { renderCards, initialCards } from "./renderCards.js";
-import { enableValidation, setError, resetErrorMessage } from "./validate.js";
+import { initialCards, Card } from "./cards.js";
+import { FormValidator } from "./validate.js";
 
 const modalEditContent = document.querySelector(".modal-edit");
 const closeForm = modalEditContent.querySelector(".modal-edit__close-form");
@@ -13,16 +13,38 @@ const profileTitle = document.querySelector(".profile__title");
 const profileSubTitle = document.querySelector(".profile__subtitle");
 const profileMobileSubTitle = document.querySelector(".profile__subtitle_mobile");
 const showedImage = document.querySelector(".showedImage");
-const closeShowedImage = showedImage.querySelector(".showedImage__close-image");
-const imageShowed = showedImage.querySelector(".showedImage__image");
-const imageShowedTitle = document.querySelector(".showedImage__title");
 
 const inputs = {
   name: modalEditContent.querySelector(".modal-edit__form-input-name"),
   aboutAndUrl: modalEditContent.querySelector(".modal-edit__form-input-about"),
 };
 
+const config = {
+  card: ".card",
+  cardsTemplate: ".cards-template",
+  cardTrashButton: ".card__trash-button",
+  buttonLiked: "cardlike-button__liked",
+  likeButton: ".cardlike-button",
+  showedImage: ".showedImage",
+  oppenedImage: ".showedImage__image",
+  cardImage: ".card__image",
+  cardTitle: ".card__title",
+  closeImageButton: ".showedImage__close-image",
+  showedImageTitle: ".showedImage__title",
+  formSelector: ".modal-edit__form",
+  inputSelector: ".modal-edit__form-input",
+  submitButtonSelector: ".modal-edit__form-submit",
+  inactiveButtonClass: "modal-edit__form-submit_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__input-error_active",
+};
+
+const formElement = document.querySelector(config.formSelector);
+const formValidator = new FormValidator(config, formElement);
+
 const isModalOpening = (element) => {
+  formValidator.enableValidation()
+
   element.classList.remove("closing");
   element.classList.add("opening");
   element.style.display = "flex";
@@ -37,6 +59,9 @@ const capitalizeName = (str) => {
 };
 
 const closeModal = (modal) => {
+  formValidator.hideInputError(inputs.aboutAndUrl)
+  formValidator.hideInputError(inputs.name)
+
   modal.classList.add("closing");
   modal.classList.remove("opening");
 
@@ -54,9 +79,17 @@ const closeModalOnBlur = (e) => {
 const closeModalOnEsc = (e) => {
   if (e.key === "Escape") {
     closeModal(modalEditContent);
-    closeModal(showedImage);
   }
 };
+
+function renderCards() {
+  cards.innerHTML = "";
+  initialCards.forEach((item) => {
+    const card = new Card(config, item, config.cardsTemplate);
+    const cardElement = card.generateCard();
+    cards.append(cardElement);
+  });
+}
 
 const setPlaceholders = (title, subtitle) => {
   inputs.name.value = title ?? "";
@@ -65,8 +98,6 @@ const setPlaceholders = (title, subtitle) => {
 
 const showModalEditContent = (e) => {
   const targetId = e.target.getAttribute("id");
-  const form = document.querySelector(".modal-edit__form");
-  const inputElement = form.querySelectorAll(".modal-edit__form-input");
 
   const {
     setInputType,
@@ -78,14 +109,12 @@ const showModalEditContent = (e) => {
 
   modalTitle.textContent = "";
 
-  resetErrorMessage(inputElement, form);
-
   isModalOpening(modalEditContent);
 
   setInputType(targetId, inputs.aboutAndUrl);
   removeInputAttribute(targetId, inputs.aboutAndUrl);
   setMinMaxLength(targetId, inputs.aboutAndUrl, inputs.name);
-  changeTitlesByTargetId(targetId, modalTitle.textContent);
+  changeTitlesByTargetId(targetId, modalTitle);
 
   targetId === "addButton"
     ? (setPlaceholders(),
@@ -102,7 +131,6 @@ const showModalEditContent = (e) => {
         "Insira seu nome"
       ));
 
-  enableValidation();
 };
 
 const setNewName = () => {
@@ -120,11 +148,7 @@ const setNewCard = (name, link) => {
   };
 
   initialCards.unshift(newCard);
-
-  cards.innerHTML = renderCards();
-  toggleLikeOnCards();
-  deleteCard();
-  showShowedImage();
+  renderCards();
 };
 
 const handleProfileFormSubmit = (e) => {
@@ -141,58 +165,6 @@ const handleProfileFormSubmit = (e) => {
     return;
   }
 
-  return setError(modalEditContent);
-};
-
-const handleChoiseImage = (image) => {
-  const id = image.getAttribute("data-index");
-
-  imageShowed.setAttribute("src", initialCards[id].link);
-  imageShowed.setAttribute("alt", `Imagem de ${initialCards[id].name}`);
-  imageShowedTitle.textContent = initialCards[id].name;
-
-  isModalOpening(showedImage);
-};
-
-const handleDelete = (e) => {
-  const id = e.currentTarget.parentNode.getAttribute("id");
-  const index = initialCards.findIndex((item) => item.id == id);
-
-  if (index !== -1) {
-    initialCards.splice(index, 1);
-    e.currentTarget.parentNode.remove();
-
-    cards.innerHTML = renderCards();
-    toggleLikeOnCards();
-    deleteCard();
-    showShowedImage();
-  }
-};
-
-const showShowedImage = () => {
-  const imageCard = document.querySelectorAll(".card__image");
-
-  imageCard.forEach((image) => {
-    image.addEventListener("click", () => handleChoiseImage(image));
-  });
-};
-
-const deleteCard = () => {
-  const trashIcon = document.querySelectorAll(".card__trash-button");
-
-  trashIcon.forEach((trashIcon) => {
-    trashIcon.addEventListener("click", handleDelete);
-  });
-};
-
-const handleLike = (heart) => heart.classList.toggle("cardlike-button__liked");
-
-const toggleLikeOnCards = () => {
-  const hearts = document.querySelectorAll(".cardlike-button");
-
-  hearts.forEach((heart) => {
-    heart.addEventListener("click", () => handleLike(heart));
-  });
 };
 
 const setMobileSubtitle = () => {
@@ -209,14 +181,10 @@ const updateDate = () => {
 
 closeForm.addEventListener("click", () => closeModal(modalEditContent));
 openEditForm.addEventListener("click", showModalEditContent);
-closeShowedImage.addEventListener("click", () => closeModal(showedImage));
 addNewCardButton.addEventListener("click", showModalEditContent);
 submitButton.addEventListener("click", handleProfileFormSubmit);
-cards.innerHTML = renderCards();
 window.addEventListener("mousedown", closeModalOnBlur);
 window.addEventListener("keydown", closeModalOnEsc);
 updateDate();
-toggleLikeOnCards();
-deleteCard();
-showShowedImage();
 setMobileSubtitle();
+renderCards();

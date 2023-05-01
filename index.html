@@ -22,19 +22,7 @@
           class="header__line"
         />
       </nav>
-      <div class="showedImage" id="showedImage">
-        <div class="showedImage__content">
-          <button type="button" class="showedImage__close-image">
-            &#x2715;
-          </button>
-          <img
-            src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-            alt="Nome do lugar da imagem"
-            class="showedImage__image"
-          />
-          <span class="showedImage__title"></span>
-        </div>
-      </div>
+
       <div class="modal-edit" id="modal-edit">
         <form class="modal-edit__form" >
           <h2 class="modal-edit__form-title"></h2>
@@ -85,6 +73,39 @@
         <button class="profile__add-button" id="addButton">&#43;</button>
       </section>
       <section id="cards-container" class="cards"></section>
+
+      <template class="cards-template">
+        <div class="card" >
+          <div class="showedImage" id="showedImage">
+            <div class="showedImage__content">
+              <button type="button" class="showedImage__close-image">
+                &#x2715;
+              </button>
+              <img
+                src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+                alt="Nome do lugar da imagem"
+                class="showedImage__image"
+              />
+              <span class="showedImage__title"></span>
+            </div>
+          </div>
+          <img
+            src=""
+            alt=""
+            class="card__image"
+            data-index=""
+          />
+          <img
+            src="./images/trashIcon.svg"
+            alt="deletar card"
+            class="card__trash-button"
+          />
+          <div class="card__info">
+            <h2 class="card__title"></h2>
+            <div class="cardlike-button"></div>
+          </div>
+        </div>
+      </template>
       <footer class="footer">
         &copy; <span class="year">2021</span> Around The U.S.
       </footer>
