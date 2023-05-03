@@ -43,7 +43,7 @@ export class Card {
     this._config = config;
     this._title = data.name;
     this._imageLink = data.link;
-    this._id = data.id
+    this._id = data.id;
     this._templateElement = templateElement;
   }
 
@@ -73,15 +73,19 @@ export class Card {
   _handleDelete = (e) => {
     e.currentTarget.parentNode.remove();
 
-    initialCards.splice(this, 1)
+    initialCards.splice(this, 1);
   };
 
   _handleLike = (heart) => heart.classList.toggle(this._config.buttonLiked);
 
   _openImageModal = () => {
-    const imageTitle = this._element.querySelector(this._config.showedImageTitle);
+    const imageTitle = this._element.querySelector(
+      this._config.showedImageTitle
+    );
     const showedImage = this._element.querySelector(this._config.showedImage);
-    const showedImageContent = this._element.querySelector(this._config.oppenedImage);
+    const showedImageContent = this._element.querySelector(
+      this._config.oppenedImage
+    );
     showedImageContent.setAttribute("src", this._imageLink);
     showedImage.setAttribute("alt", this._title);
     imageTitle.textContent = this._title;
@@ -113,7 +117,9 @@ export class Card {
     this._element
       .querySelector(this._config.closeImageButton)
       .addEventListener("click", () => {
-        const showedImage = this._element.querySelector(this._config.showedImage);
+        const showedImage = this._element.querySelector(
+          this._config.showedImage
+        );
         Card._closeModal(showedImage);
       });
 
@@ -124,7 +130,9 @@ export class Card {
     this._element
       .querySelector(this._config.likeButton)
       .addEventListener("click", () => {
-        const cardLikeButton = this._element.querySelector(this._config.likeButton);
+        const cardLikeButton = this._element.querySelector(
+          this._config.likeButton
+        );
 
         this._handleLike(cardLikeButton);
       });
@@ -134,9 +142,13 @@ export class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector(this._config.cardImage).style.backgroundImage = `url(${this._imageLink})`;
-    this._element.querySelector(this._config.cardImage).style.backgroundSize = "cover";
-    this._element.querySelector(this._config.cardTitle).textContent = this._title;
+    this._element.querySelector(
+      this._config.cardImage
+    ).style.backgroundImage = `url(${this._imageLink})`;
+    this._element.querySelector(this._config.cardImage).style.backgroundSize =
+      "cover";
+    this._element.querySelector(this._config.cardTitle).textContent =
+      this._title;
 
     return this._element;
   }

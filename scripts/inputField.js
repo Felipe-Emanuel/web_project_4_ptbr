@@ -34,7 +34,7 @@ export function inputField() {
   };
 
   const setModalTitle = (modalTitle, newModalTitle) => {
-    modalTitle.textContent = newModalTitle
+    modalTitle.textContent = newModalTitle;
   };
 
   const changeTitlesByTargetId = (targetId, modalTitle) => {

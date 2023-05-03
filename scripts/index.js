@@ -11,7 +11,9 @@ const submitButton = document.querySelector(".modal-edit__form-submit");
 const cards = document.querySelector(".cards");
 const profileTitle = document.querySelector(".profile__title");
 const profileSubTitle = document.querySelector(".profile__subtitle");
-const profileMobileSubTitle = document.querySelector(".profile__subtitle_mobile");
+const profileMobileSubTitle = document.querySelector(
+  ".profile__subtitle_mobile"
+);
 const showedImage = document.querySelector(".showedImage");
 
 const inputs = {
@@ -43,7 +45,7 @@ const formElement = document.querySelector(config.formSelector);
 const formValidator = new FormValidator(config, formElement);
 
 const isModalOpening = (element) => {
-  formValidator.enableValidation()
+  formValidator.enableValidation();
 
   element.classList.remove("closing");
   element.classList.add("opening");
@@ -59,8 +61,8 @@ const capitalizeName = (str) => {
 };
 
 const closeModal = (modal) => {
-  formValidator.hideInputError(inputs.aboutAndUrl)
-  formValidator.hideInputError(inputs.name)
+  formValidator.hideInputError(inputs.aboutAndUrl);
+  formValidator.hideInputError(inputs.name);
 
   modal.classList.add("closing");
   modal.classList.remove("opening");
@@ -130,7 +132,6 @@ const showModalEditContent = (e) => {
         inputs.aboutAndUrl,
         "Insira seu nome"
       ));
-
 };
 
 const setNewName = () => {
@@ -164,7 +165,6 @@ const handleProfileFormSubmit = (e) => {
     closeModal(modalEditContent);
     return;
   }
-
 };
 
 const setMobileSubtitle = () => {
