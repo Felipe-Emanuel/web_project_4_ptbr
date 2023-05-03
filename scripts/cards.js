@@ -144,7 +144,7 @@ export class Card {
 
     this._element.querySelector(
       this._config.cardImage
-    ).style.backgroundImage = `url(${this._imageLink})`;
+    ).setAttribute("src", this._imageLink);
     this._element.querySelector(this._config.cardImage).style.backgroundSize =
       "cover";
     this._element.querySelector(this._config.cardTitle).textContent =
