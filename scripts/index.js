@@ -85,11 +85,13 @@ const closeModalOnEsc = (e) => {
 };
 
 function renderCards() {
-  cards.innerHTML = "";
+  const cardsUl = cards.querySelector(".cards-container__ul")
+  cardsUl.innerHTML = "";
+
   initialCards.forEach((item) => {
     const card = new Card(config, item, config.cardsTemplate);
     const cardElement = card.generateCard();
-    cards.append(cardElement);
+    cardsUl.append(cardElement);
   });
 }
 

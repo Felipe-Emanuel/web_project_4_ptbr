@@ -50,8 +50,9 @@ export class Card {
   _getTemplate() {
     const cardTemplate = document.querySelector(this._templateElement);
     const cardElement = cardTemplate.content
-      .querySelector(this._config.card)
-      .cloneNode(true);
+    .querySelector(this._config.card)
+    .cloneNode(true);
+
     return cardElement;
   }
 
@@ -145,8 +146,7 @@ export class Card {
     this._element.querySelector(
       this._config.cardImage
     ).setAttribute("src", this._imageLink);
-    this._element.querySelector(this._config.cardImage).style.backgroundSize =
-      "cover";
+
     this._element.querySelector(this._config.cardTitle).textContent =
       this._title;
 
