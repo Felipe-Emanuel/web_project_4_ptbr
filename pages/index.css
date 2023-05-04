@@ -39,8 +39,8 @@
 @import url("../blocks/profile/__add-button/profile__add-button.css");
 
 /* cards imports */
-@import url("../blocks/cards-container/cards-container.css");
-@import url("../blocks/cards-container/__ul/cards-container__ul.css");
+@import url("../blocks/cards/cards.css");
+@import url("../blocks/cards/__ul/cards__ul.css");
 
 /* card imports */
 @import url("../blocks/card/card.css");

@@ -85,7 +85,7 @@ const closeModalOnEsc = (e) => {
 };
 
 function renderCards() {
-  const cardsUl = cards.querySelector(".cards-container__ul")
+  const cardsUl = cards.querySelector(".cards__ul")
   cardsUl.innerHTML = "";
 
   initialCards.forEach((item) => {
