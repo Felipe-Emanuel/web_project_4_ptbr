@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="./images/logo/Vector.svg" />
+    <title>EUA Afora</title>
+  </head>
+  <body>
+    <main class="content">
+      <nav class="header">
+        <img
+          alt="EUA Afora Logo"
+          src="<%=require('./images/logo/Vector.svg')%>"
+          class="header__logo"
+        />
+        <img
+          alt="linha de separação do cabeçalho do site"
+          src="<%=require('./images/Line.svg')%>"
+          class="header__line"
+        />
+      </nav>
+
+      <div class="popup popup-edit">
+        <form class="popup__form form" id="popup-edit">
+          <h2 class="popup__title">Editar Perfil</h2>
+          <button type="button" class="popup__close-form">&#x2715;</button>
+          <input
+            type="text"
+            placeholder="Insira seu nome"
+            minlength='2'
+            maxlength='40'
+            name="name"
+            id="name"
+            class="popup__input input"
+            required
+          />
+          <span class="popup__error name-error"></span>
+          <input
+            type="text"
+            placeholder="Insira sua profissão"
+            minlength='2'
+            maxlength='200'
+            name="job"
+            id="job"
+            class="popup__input input"
+            required
+          />
+          <span class="popup__error job-error"></span>
+          <button type="submit" class="popup__submit">Salvar</button>
+        </form>
+      </div>
+      <div class="popup popup-addImage">
+        <form class="popup__form form" id="popup-addImage">
+          <h2 class="popup__title">Novo Lugar</h2>
+          <button type="button" class="popup__close-form">&#x2715;</button>
+          <input
+            type="text"
+            placeholder="Nome do lugar"
+            minlength='2'
+            maxlength='30'
+            name="cityName"
+            id="cityName"
+            class="popup__input input"
+            required
+          />
+          <span class="popup__error cityName-error"></span>
+          <input
+            type="url"
+            placeholder="URL da imagem"
+            name="imageUrl"
+            id="imageUrl"
+            class="popup__input input"
+            required
+          />
+          <span class="popup__error imageUrl-error"></span>
+          <button type="submit" class="popup__submit">Salvar</button>
+        </form>
+      </div>
+
+      <section class="profile">
+        <div class="profile__info">
+          <div class="profile__avatar">
+            <img
+              class="profile__avatar-image"
+              src="<%=require('./images/profile/image.jpg')%>"
+              alt="Imagem perfil do usuário"
+            />
+          </div>
+          <div>
+            <div class="profile__header">
+              <h1 class="profile__title">Jacques Cousteau</h1>
+              <button class="profile__eddit-button edit-profile" id="eddit-button">
+                <img
+                  id="edditBbutton"
+                  src="<%=require('./images/Eddit.svg')%>"
+                  alt="imagem de um lápis referenciando a possível edição dos dados"
+                />
+              </button>
+            </div>
+            <h2 class="profile__subtitle">Explorar</h2>
+          </div>
+          <h2 class="profile__subtitle profile__subtitle_mobile">Explorar</h2>
+        </div>
+        <button class="profile__add-button add-image" id="addButton">&#43;</button>
+      </section>
+      <section id="cards-container" class="cards">
+        <ul class="cards__ul">
+        </ul>
+      </section>
+      <template class="cards-template">
+          <li class="card">
+              <div class="showedImage" id="showedImage">
+                <div class="showedImage__content">
+                  <button type="button" class="showedImage__close-form popup__close-form">
+                    &#x2715;
+                  </button>
+                  <img
+                    src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+                    alt="Nome do lugar da imagem"
+                    class="showedImage__image"
+                  />
+                  <span class="showedImage__title"></span>
+                </div>
+              </div>
+              <img
+                src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+                alt="Vale de Yosemite"
+                class="card__image"
+                data-index="0"
+              />
+              <img
+                src="<%=require('./images/trashIcon.svg')%>"
+                alt="deletar card"
+                class="card__trash-button"
+              />
+              <div class="card__info">
+                <h2 class="card__title"></h2>
+                <div class="cardlike-button"></div>
+              </div>
+          </li>
+      </template>
+      <footer class="footer">
+        &copy; <p class="year">2021</p> Around The U.S.
+      </footer>
+    </main>
+  </body>
+</html>
