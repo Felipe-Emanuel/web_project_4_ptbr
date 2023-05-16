@@ -1,3 +1,5 @@
+import { customValidation } from "../../utils/customValidation";
+
 export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
@@ -6,7 +8,7 @@ export class FormValidator {
       this._formElement.querySelectorAll(this._config.inputs.input)
     );
     this._buttonElement = this._formElement.querySelector(
-      this._config.inputs.submt
+      this._config.inputs.submit
     );
   }
 
@@ -24,6 +26,7 @@ export class FormValidator {
     );
 
     inputElement.classList.add(this._config.messages.error.inputErrorClass);
+
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._config.messages.error.errorClass);
   }
@@ -63,6 +66,7 @@ export class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
+        customValidation(inputElement)
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });

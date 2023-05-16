@@ -40,7 +40,7 @@ export const config = {
     },
     showedImages: {
       showedImage: ".showedImage",
-      oppenedImage: ".showedImage__image",
+      openedImage: ".showedImage__image",
       showedImageTitle: ".showedImage__title",
     },
   },
@@ -50,7 +50,7 @@ export const config = {
   },
   inputs: {
     input: ".popup__input",
-    submt: ".popup__submit",
+    submit: ".popup__submit",
   },
   messages: {
     error: {
