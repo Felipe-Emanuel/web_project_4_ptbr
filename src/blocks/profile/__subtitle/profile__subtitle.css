@@ -4,6 +4,7 @@
   line-height: 1rem;
   text-align: center;
   display: none;
+  margin-left: 1rem;
 }
 
 @media screen and (min-width: 648px) {

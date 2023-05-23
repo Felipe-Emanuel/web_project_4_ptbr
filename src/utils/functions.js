@@ -30,3 +30,13 @@ export const addNewCard = (name, link, cardsSection) => {
   initialCards.unshift(newCard);
   cardsSection.renderSection();
 };
+
+export const requestInfo = (request) => {
+  const { name, about } = request
+  return {name, about}
+}
+
+export const submitCallback = () => {
+  //invocar chamada de delete
+  console.log("invocar chamada de delete");
+};

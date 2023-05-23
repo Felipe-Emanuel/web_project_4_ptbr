@@ -33,7 +33,7 @@ export class PopupWithForm extends Popup {
     const inputElements = this._form.querySelectorAll(".input");
 
     inputElements.forEach((input) => {
-      const checkInput = input.name === "name" || input.name === "job";
+      const checkInput = input.name === "name" || input.name === "about";
       const inputValues = capitalizeString(this._getInputValues()[input.name]);
 
       if (checkInput) {

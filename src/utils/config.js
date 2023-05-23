@@ -2,7 +2,7 @@ export const config = {
   user: {
     section: ".profile",
     name: ".profile__title",
-    job: ".profile__subtitle",
+    about: ".profile__subtitle",
   },
   card: {
     card: ".card",
@@ -38,6 +38,14 @@ export const config = {
       popupSelector: ".popup-addImage",
       openButton: ".add-image",
     },
+    removeCard: {
+      popupSelector: ".popup-removeCard",
+      openButton: ".card__trash-button",
+    },
+    changeImageProfile: {
+      popupSelector: ".popup-imageProfile",
+      openButton: ".profile__eddit-image",
+    },
     showedImages: {
       showedImage: ".showedImage",
       openedImage: ".showedImage__image",
@@ -47,6 +55,7 @@ export const config = {
   forms: {
     editForm: ".popup-edit",
     addImageForm: ".popup-addImage",
+    changeImageProfileForm: ".popup-imageProfile",
   },
   inputs: {
     input: ".popup__input",

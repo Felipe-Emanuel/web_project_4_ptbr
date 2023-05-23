@@ -1,7 +1,7 @@
 import { initialCards } from "../../utils/constants";
 
 export class Card {
-  constructor(config, data, templateElement, handleCardClick) {
+  constructor(config, data, templateElement, handleCardClick, handleCardDelet) {
     this._config = config;
     this._isLiked = data.isLiked;
     this._title = data.name;
@@ -9,6 +9,7 @@ export class Card {
     this._id = data.id;
     this._templateElement = templateElement;
     this._handleCardClick = handleCardClick;
+    this._handleCardDelet = handleCardDelet
   }
 
   _getTemplate() {
@@ -36,13 +37,15 @@ export class Card {
   }
 
   _setEventListeners() {
+
     this._element
       .querySelector(this._config.card.cardImage)
       .addEventListener("click", () => this._openImageModal());
 
     this._element
       .querySelector(this._config.buttons.trash.cardTrashButton)
-      .addEventListener("click", (e) => this._handleDelete(e));
+      .addEventListener("click", () => this._handleCardDelet());
+      // .addEventListener("click", (e) => this._handleDelete(e));
 
     this._element
       .querySelector(this._config.buttons.like.likeButton)

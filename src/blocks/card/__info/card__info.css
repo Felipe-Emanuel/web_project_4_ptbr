@@ -1,7 +1,7 @@
 .card__info {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 90%;
   height: 10%;
   display: flex;
   justify-content: space-between;
