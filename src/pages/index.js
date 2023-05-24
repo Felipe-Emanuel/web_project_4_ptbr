@@ -9,7 +9,9 @@ import { FormValidator } from "../components/validation/Validate";
 import { config } from "../utils/config";
 import {
   addNewCard,
+  removeSkeletons,
   requestInfo,
+  setSkeletons,
   submitCallback,
   updateDate,
 } from "../utils/functions";
@@ -23,6 +25,10 @@ import {
   showedImage,
   removeCard,
   submit as submitButton,
+  profileImage,
+  loading,
+  addButton,
+  userAboutMobile,
 } from "../utils/constants";
 import { apiOptions } from "../utils/apiOptions";
 import { Api } from "../components/data/Api";
@@ -72,17 +78,37 @@ const getUset = async () => {
   const getUserInfo = new Api(apiOptions.createGet("", "users/me"));
   const getResult = await getUserInfo.get();
 
+  profileImage.src = getResult.avatar;
+
+  removeSkeletons()
   userInstance(getResult);
 };
 
 const updateUser = async (popup) => {
+  setSkeletons()
   const inputValues = popup.inputValues();
   const setUserInfo = new Api(
     apiOptions.createWithBody("PATCH", "users/me", inputValues)
   );
   const patchUserInfo = await setUserInfo.set();
 
+  removeSkeletons()
   userInstance(patchUserInfo);
+};
+
+//https://avatars.githubusercontent.com/Felipe-Emanuel
+const updateImageProfile = async (popup) => {
+  loading.style.display = "flex";
+
+  const { imageUrl } = popup.inputValues();
+
+  const avatar = { avatar: imageUrl };
+  const setImageProfile = new Api(
+    apiOptions.createWithBody("PATCH", "users/me/avatar", avatar)
+  );
+
+  await setImageProfile.set();
+  return await getUset();
 };
 
 formsArr.forEach((forms) => {
@@ -92,17 +118,34 @@ formsArr.forEach((forms) => {
 
 popupsArr.forEach((item) => {
   const { popupSelector, openButton } = item;
+
   const popup = new PopupWithForm(popupSelector, openButton, () => {
-    const edit = popupSelector === ".popup-edit";
     const { cityName, imageUrl } = popup.inputValues();
 
-    edit ? updateUser(popup) : addNewCard(cityName, imageUrl, cardsSection);
+    const slicedPopupSelector = popupSelector.slice(7);
+
+    const selectors = {
+      edit: () => updateUser(popup),
+      imageProfile: () => updateImageProfile(popup),
+      addImage: () => addNewCard(cityName, imageUrl, cardsSection),
+    };
+
+    return selectors[slicedPopupSelector]();
   });
   popup.setEventListeners();
 });
 
+//.popup-imageProfile
+
+// const teste = async () => {
+//   const cards = new Api(apiOptions.createGet("", "cards"))
+//   const results = await cards.get()
+
+//   console.log(results)
+// }
+
+// teste();
+
 cardsSection.renderSection();
 getUset();
 updateDate();
-
-//criar classe para alterar a imagem do usuário (atualmente ela está adicionando novo card)

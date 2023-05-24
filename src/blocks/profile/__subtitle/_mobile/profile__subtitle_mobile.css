@@ -1,5 +1,5 @@
 .profile__subtitle_mobile {
-  display: flex;
+  display: none;
   font-size: 0.87rem;
   font-weight: 400;
   line-height: 1rem;

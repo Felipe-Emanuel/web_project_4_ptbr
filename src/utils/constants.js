@@ -42,6 +42,9 @@ export const initialCards = [
 
 export const { cardsUl, cardsTemplate } = config.card;
 export const cardUl = document.querySelector(cardsUl);
+export const loading = document.querySelector(config.loading);
+export const skeletonLoading = document.querySelector(config.skeletonLoading);
+export const addButton = document.querySelector(config.buttons.addButton);
 
 export const { submit } = config.inputs
 
@@ -52,7 +55,12 @@ const { user } = config;
 export const userInfo = {
   userName: user.name,
   userAbout: user.about,
+  userAboutMobile: user.aboutModile,
+  avatar: user.avatar,
 };
+
+export const userAboutMobile = document.querySelector(userInfo.userAboutMobile)
+export const profileImage = document.querySelector(userInfo.avatar)
 
 export const { showedImage } = config.popups.showedImages;
 export const { popups } = config;

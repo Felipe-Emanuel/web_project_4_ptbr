@@ -1,8 +1,12 @@
 export const config = {
+  loading: ".loading",
+  skeletonLoading: ".skeletonLoading",
   user: {
     section: ".profile",
     name: ".profile__title",
     about: ".profile__subtitle",
+    aboutModile: ".profile__subtitle_mobile",
+    avatar: ".profile__avatar-image"
   },
   card: {
     card: ".card",
@@ -13,6 +17,7 @@ export const config = {
     cardTitle: ".card__title",
   },
   buttons: {
+    addButton: ".profile__add-button",
     trash: {
       cardTrashButton: ".card__trash-button",
     },

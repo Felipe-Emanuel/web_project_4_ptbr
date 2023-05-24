@@ -106,15 +106,20 @@
       <section class="profile">
         <div class="profile__info">
           <div class="profile__avatar">
+            <div class="loading" ></div>
             <img
-              class="profile__avatar-image"
-              src="<%=require('./images/profile/image.jpg')%>"
+              class="profile__avatar-image "
+              src="<%=require('./images/profile/loadingAvatar.png')%>"
               alt="Imagem perfil do usuário"
             />
             <div class="profile__eddit-image"></div>
           </div>
           </div>
-          <div>
+          <div class="profile__header-info">
+            <div class="skeletonLoading">
+              <div class="skeleton-title"></div>
+              <div class="skeleton-subTitle"></div>
+            </div>
             <div class="profile__header">
               <h1 class="profile__title"></h1>
               <button class="profile__eddit-button edit-profile" id="eddit-button">

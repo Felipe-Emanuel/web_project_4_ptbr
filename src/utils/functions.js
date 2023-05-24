@@ -1,4 +1,11 @@
-import { cardUl, initialCards } from "./constants";
+import {
+  addButton,
+  cardUl,
+  initialCards,
+  loading,
+  skeletonLoading,
+  userAboutMobile,
+} from "./constants";
 
 export const updateDate = () => {
   const date = new Date();
@@ -32,11 +39,35 @@ export const addNewCard = (name, link, cardsSection) => {
 };
 
 export const requestInfo = (request) => {
-  const { name, about } = request
-  return {name, about}
-}
+  const { name, about } = request;
+  return { name, about };
+};
 
 export const submitCallback = () => {
-  //invocar chamada de delete
   console.log("invocar chamada de delete");
+};
+
+let windowWidth = window.innerWidth;
+
+const checkWidth = () => {
+  windowWidth = window.innerWidth;
+
+  windowWidth >= 648
+    ? userAboutMobile.style.display = "none"
+    : userAboutMobile.style.display = "flex"
+};
+
+window.addEventListener("resize", checkWidth);
+export const removeSkeletons = () => {
+  skeletonLoading.style.display = "none";
+  loading.style.display = "none";
+
+  addButton.style.display = "block";
+  userAboutMobile.style.display = "flex";
+  checkWidth();
+};
+
+export const setSkeletons = () => {
+  skeletonLoading.style.display = "block";
+  userAboutMobile.style.display = "none";
 };

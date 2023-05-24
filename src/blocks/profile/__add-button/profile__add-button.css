@@ -1,5 +1,7 @@
 .profile__add-button {
-  all: unset;
+  display: none;
+  background: transparent;
+  color: #fff;
   max-width: 17.62rem;
   width: 100%;
   text-align: center;
@@ -10,6 +12,7 @@
   transition: all 150ms ease-in;
   cursor: pointer;
   font-size: 2rem;
+
 }
 
 .profile__add-button:hover {
@@ -18,6 +21,7 @@
 
 @media screen and (min-width: 648px) {
   .profile__add-button {
+    display: none;
     width: 9.4rem;
     height: 3.12rem;
     padding: 0;
