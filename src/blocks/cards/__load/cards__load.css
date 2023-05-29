@@ -1,0 +1,22 @@
+.cards__load {
+  position: relative;
+  max-width: 17.62rem;
+  width: 100%;
+  height: 22.56rem;
+  background: #000;
+  overflow: hidden;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  border-radius: 0.625rem;
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 30%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 10%);
+  }
+}

@@ -25,7 +25,7 @@ export class Api {
 
   async put() {
     const res = await fetch(this._baseUrl, {
-      method: 'PUT',
+      method: "PUT",
       headers: this._headers,
     });
     return await this._validation(res);

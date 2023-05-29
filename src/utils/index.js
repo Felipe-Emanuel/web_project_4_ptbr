@@ -4,11 +4,9 @@ import {
   removeSkeletons,
   requestInfo,
   setSkeletons,
-  submitCallback,
   updateDate,
 } from "./functions";
 import {
-  initialCards,
   popupsArr,
   userInfo,
   formsArr,
@@ -24,7 +22,6 @@ import { apiOptions } from "./apiOptions";
 
 export {
   config,
-  initialCards,
   popupsArr,
   userInfo,
   formsArr,
@@ -40,6 +37,5 @@ export {
   removeSkeletons,
   requestInfo,
   setSkeletons,
-  submitCallback,
   updateDate,
 };

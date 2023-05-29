@@ -1,6 +1,7 @@
 export const config = {
   loading: ".loading",
   skeletonLoading: ".skeletonLoading",
+  cardsLoad: ".skeletonLoading-cards",
   user: {
     section: ".profile",
     name: ".profile__title",

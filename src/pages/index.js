@@ -4,6 +4,7 @@ import { FormValidator } from "../components/validation/Validate";
 import * as Popup from "../components/popups/index";
 import * as Layout from "../components/layout/index";
 import * as Utils from "../utils/index";
+import { cardSkeleton } from "../utils/constants";
 
 const users = async () => {
   const getUsers = new Api(Utils.apiOptions.createGet("users"));
@@ -19,11 +20,10 @@ const handleCardClick = (link, name) => {
   return showedImageElement.openImage(link, name);
 };
 
-const handleDelet = async (cardId, popup) => {
+const handleDelete = async (cardId, popup) => {
   try {
     const deleteCard = new Api(Utils.apiOptions.createDelete("cards", cardId));
     popup.close();
-    console.log("card deletado: ", cardId);
 
     await deleteCard.delete();
 
@@ -33,16 +33,14 @@ const handleDelet = async (cardId, popup) => {
   }
 };
 
-const handleCardDelet = (cardId) => {
-  console.log(cardId);
-
+const handleCardDelete = (cardId) => {
   const popupRemoveCard = new Popup.PopupRemoveCard(
     Utils.removeCard.popupSelector,
     Utils.submitButton,
-    async () => await handleDelet(cardId, popupRemoveCard)
+    async () => await handleDelete(cardId, popupRemoveCard)
   );
 
-  popupRemoveCard.setEventListeners();
+  return popupRemoveCard.setEventListeners();
 };
 
 const handleLike = async (cardId) => {
@@ -50,11 +48,10 @@ const handleLike = async (cardId) => {
     const res = new Api(Utils.apiOptions.createPut("cards/likes", cardId));
 
     return await res.put();
-
   } catch (error) {
-    console.error("Falha ao requisitar curtida do card: ", error);
+    console.error("Falha ao adicionar curtida do card: ", error);
   } finally {
-    await cardsSection()
+    await cardsSection();
   }
 };
 
@@ -63,11 +60,10 @@ const handleUnLike = async (cardId) => {
     const res = new Api(Utils.apiOptions.createDelete("cards/likes", cardId));
 
     return await res.delete();
-
   } catch (error) {
-    console.error("Falha ao requisitar curtida do card: ", error);
+    console.error("Falha ao deletar curtida do card: ", error);
   } finally {
-    await cardsSection()
+    await cardsSection();
   }
 };
 
@@ -83,7 +79,7 @@ const cardsSection = async () => {
             item,
             Utils.cardsTemplate,
             handleCardClick,
-            () => handleCardDelet(item._id),
+            () => handleCardDelete(item._id),
             async () => await users(),
             async () => await handleLike(item._id),
             async () => await handleUnLike(item._id)
@@ -102,13 +98,15 @@ const cardsSection = async () => {
 
 const getCards = async () => {
   try {
+    cardSkeleton.style.display = "flex";
+
     const cards = new Api(Utils.apiOptions.createGet("cards"));
     const results = await cards.get();
     return results;
   } catch (error) {
     console.error("Falha ao resgatar os cards: ", error);
   } finally {
-    console.log("fazer o load dos cards");
+    cardSkeleton.style.display = "none";
     validate();
   }
 };
@@ -170,8 +168,6 @@ const updateUser = async (popup) => {
     Utils.removeSkeletons();
   }
 };
-
-//https://avatars.githubusercontent.com/Felipe-Emanuel
 
 const updateImageProfile = async (popup) => {
   try {

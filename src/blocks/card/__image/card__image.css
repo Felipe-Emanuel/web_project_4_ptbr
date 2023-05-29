@@ -5,6 +5,5 @@
 }
 
 .card__image:hover {
-  scale: 1.05;
-  transform: rotate(1.5deg);
+  scale: 1.03;
 }

@@ -44,6 +44,8 @@
 /* cards imports */
 @import url("../blocks/cards/cards.css");
 @import url("../blocks/cards/__ul/cards__ul.css");
+@import url("../blocks/cards/__load/cards__load.css");
+@import url("../blocks/cards/__load-animation/cards__load-animation.css");
 
 /* card imports */
 @import url("../blocks/card/card.css");
@@ -69,6 +71,7 @@
 /* loading imports */
 @import url("../blocks/loading/loading.css");
 @import url("../blocks/loading/skeletonLoading.css");
+@import url("../blocks/loading/skeletonLoading-cards.css");
 
 /* closing imports */
 @import url("../blocks/closing/closing.css");

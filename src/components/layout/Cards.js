@@ -33,10 +33,12 @@ export class Card {
 
   async _setLikeCounter() {
     const likeslength = await this._likes.length;
-    const likeElement = this._element.querySelector(this._config.card.likeLength);
+    const likeElement = this._element.querySelector(
+      this._config.card.likeLength
+    );
 
     if (likeElement) {
-      likeElement.textContent = likeslength
+      likeElement.textContent = likeslength;
     }
   }
 
@@ -63,7 +65,7 @@ export class Card {
 
     if (idsLiked.includes(ids[0])) {
       heart.classList.add(this._config.buttons.like.buttonLiked);
-      return
+      return;
     }
   }
 
@@ -85,7 +87,9 @@ export class Card {
 
     this._element
       .querySelector(this._config.buttons.like.likeButton)
-      .addEventListener("click", async () => {await this._isLiked(cardLikeButton)});
+      .addEventListener("click", async () => {
+        await this._isLiked(cardLikeButton);
+      });
 
     this._element
       .querySelector(this._config.card.cardImage)
@@ -95,7 +99,7 @@ export class Card {
       .querySelector(this._config.buttons.trash.cardTrashButton)
       .addEventListener("click", async () => this._handleCardDelete());
 
-    if ((await this._validUsers()) === "") {
+    if ((await this._validUsers()) !== "d12b45c6bd03be9014a90a62") {
       this._element.querySelector(
         this._config.buttons.trash.cardTrashButton
       ).style.display = "none";

@@ -1,22 +1,25 @@
 import { Popup } from "./Popup";
 
 export class PopupRemoveCard extends Popup {
-  constructor (selector, submitButton, submitCallback,) {
+  constructor(selector, submitButton, submitCallback) {
     super(selector);
     this._form = this._popup.querySelector(".form");
-    this._submitButton = this._popup.querySelector(submitButton)
-    this._submitCallback = submitCallback
+    this._submitButton = this._popup.querySelector(submitButton);
+    this._submitCallback = submitCallback;
   }
 
   setEventListeners() {
     super.setEventListeners();
 
-    this._submitButton.addEventListener("click", (e) => {
+    this.open();
+
+    const clickHandler = async (e) => {
       e.preventDefault();
 
-      this._submitCallback()
-    })
+      await this._submitCallback();
+      this._submitButton.removeEventListener("click", clickHandler);
+    };
 
-    this.open();
+    this._submitButton.addEventListener("click", clickHandler);
   }
 }
