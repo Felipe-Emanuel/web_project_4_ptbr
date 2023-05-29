@@ -28,8 +28,8 @@
           <input
             type="text"
             placeholder="Insira seu nome"
-            minlength='2'
-            maxlength='40'
+            minlength="2"
+            maxlength="40"
             name="name"
             id="name"
             class="popup__input input"
@@ -39,8 +39,8 @@
           <input
             type="text"
             placeholder="Insira sua profissão"
-            minlength='2'
-            maxlength='200'
+            minlength="2"
+            maxlength="200"
             name="about"
             id="about"
             class="popup__input input"
@@ -57,8 +57,8 @@
           <input
             type="text"
             placeholder="Nome do lugar"
-            minlength='2'
-            maxlength='30'
+            minlength="2"
+            maxlength="30"
             name="cityName"
             id="cityName"
             class="popup__input input"
@@ -79,7 +79,7 @@
       </div>
 
       <div class="popup popup-removeCard">
-        <form class="popup__form form" id="popup-imageProfile">
+        <form class="popup__form form" id="popup-removeCard">
           <h2 class="popup__title">Tem certeza?</h2>
           <button type="button" class="popup__close-form">&#x2715;</button>
           <button type="submit" class="popup__submit">Sim</button>
@@ -93,12 +93,12 @@
           <input
             type="url"
             placeholder="URL da imagem"
-            name="imagePerfilUrl"
-            id="imagePerfilUrl"
+            name="imageProfile"
+            id="imageProfile"
             class="popup__input input"
             required
           />
-          <span class="popup__error imagePerfilUrl-error"></span>
+          <span class="popup__error imageProfile-error"></span>
           <button type="submit" class="popup__submit">Salvar</button>
         </form>
       </div>
@@ -106,35 +106,39 @@
       <section class="profile">
         <div class="profile__info">
           <div class="profile__avatar">
-            <div class="loading" ></div>
+            <div class="loading"></div>
             <img
-              class="profile__avatar-image "
+              class="profile__avatar-image"
               src="<%=require('./images/profile/loadingAvatar.png')%>"
               alt="Imagem perfil do usuário"
             />
             <div class="profile__eddit-image"></div>
           </div>
-          </div>
-          <div class="profile__header-info">
-            <div class="skeletonLoading">
-              <div class="skeleton-title"></div>
-              <div class="skeleton-subTitle"></div>
-            </div>
-            <div class="profile__header">
-              <h1 class="profile__title"></h1>
-              <button class="profile__eddit-button edit-profile" id="eddit-button">
-                <img
-                  id="edditBbutton"
-                  src="<%=require('./images/Eddit.svg')%>"
-                  alt="imagem de um lápis referenciando a possível edição dos dados"
-                />
-              </button>
-            </div>
-            <h2 class="profile__subtitle"></h2>
-          </div>
-          <h2 class="profile__subtitle profile__subtitle_mobile"></h2>
         </div>
-        <button class="profile__add-button add-image" id="addButton">&#43;</button>
+        <div class="profile__header-info">
+          <div class="skeletonLoading">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-subTitle"></div>
+          </div>
+          <div class="profile__header">
+            <h1 class="profile__title"></h1>
+            <button
+              class="profile__eddit-button edit-profile"
+              id="eddit-button"
+            >
+              <img
+                id="edditBbutton"
+                src="<%=require('./images/Eddit.svg')%>"
+                alt="imagem de um lápis referenciando a possível edição dos dados"
+              />
+            </button>
+          </div>
+          <h2 class="profile__subtitle"></h2>
+        </div>
+        <h2 class="profile__subtitle profile__subtitle_mobile"></h2>
+        <button class="profile__add-button add-image" id="addButton">
+          &#43;
+        </button>
       </section>
       <section id="cards-container" class="cards">
         <div class="skeletonLoading-cards">
@@ -157,43 +161,45 @@
             <div class="cards__load-animation"></div>
           </div>
         </div>
-        <ul class="cards__ul">
-        </ul>
+        <ul class="cards__ul"></ul>
       </section>
       <template class="cards-template">
-          <li class="card">
-              <div class="showedImage" id="showedImage">
-                <div class="showedImage__content">
-                  <button type="button" class="showedImage__close-form popup__close-form">
-                    &#x2715;
-                  </button>
-                  <img
-                    src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-                    alt="Nome do lugar da imagem"
-                    class="showedImage__image"
-                  />
-                  <div class="showedImage__title"></div>
-                </div>
-              </div>
+        <li class="card">
+          <div class="showedImage" id="showedImage">
+            <div class="showedImage__content">
+              <button
+                type="button"
+                class="showedImage__close-form popup__close-form"
+              >
+                &#x2715;
+              </button>
               <img
                 src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
-                alt="Vale de Yosemite"
-                class="card__image"
+                alt="Nome do lugar da imagem"
+                class="showedImage__image"
               />
-              <img
-                src="<%=require('./images/trashIcon.svg')%>"
-                alt="deletar card"
-                class="card__trash-button"
-              />
-              <div class="card__info">
-                <div class="card__info-load"></div>
-                <h2 class="card__title"></h2>
-                <div>
-                  <div class="cardlike-button"></div>
-                  <p class="cardlike-number">0</p>
-                </div>
-              </div>
-          </li>
+              <div class="showedImage__title"></div>
+            </div>
+          </div>
+          <img
+            src="https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg"
+            alt="Vale de Yosemite"
+            class="card__image"
+          />
+          <img
+            src="<%=require('./images/trashIcon.svg')%>"
+            alt="deletar card"
+            class="card__trash-button"
+          />
+          <div class="card__info">
+            <div class="card__info-load"></div>
+            <h2 class="card__title"></h2>
+            <div>
+              <div class="cardlike-button"></div>
+              <p class="cardlike-number">0</p>
+            </div>
+          </div>
+        </li>
       </template>
       <footer class="footer">
         <p>&copy; <span class="year">2021</span> Around The U.S.</p>
