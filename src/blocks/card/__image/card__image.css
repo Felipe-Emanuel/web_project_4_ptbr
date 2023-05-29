@@ -1,4 +1,10 @@
 .card__image {
   position: relative;
   height: 100%;
+  transition: all 150ms linear;
+}
+
+.card__image:hover {
+  scale: 1.05;
+  transform: rotate(1.5deg);
 }

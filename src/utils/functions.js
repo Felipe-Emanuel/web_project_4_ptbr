@@ -1,7 +1,6 @@
 import {
   addButton,
   cardUl,
-  initialCards,
   loading,
   skeletonLoading,
   userAboutMobile,
@@ -23,19 +22,8 @@ export const capitalizeString = (str) => {
     .join(" ");
 };
 
-export const addNewCard = (name, link, cardsSection) => {
+export const clearCardUl = () => {
   cardUl.innerHTML = "";
-
-  const id = initialCards.length + 1;
-  const newCard = {
-    name,
-    link,
-    id,
-    isLiked: false,
-  };
-
-  initialCards.unshift(newCard);
-  cardsSection.renderSection();
 };
 
 export const requestInfo = (request) => {

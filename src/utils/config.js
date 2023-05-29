@@ -15,6 +15,7 @@ export const config = {
     cardsTemplate: ".cards-template",
     cardImage: ".card__image",
     cardTitle: ".card__title",
+    likeLength: ".cardlike-number",
   },
   buttons: {
     addButton: ".profile__add-button",

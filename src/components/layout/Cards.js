@@ -1,15 +1,25 @@
-import { initialCards } from "../../utils/constants";
-
 export class Card {
-  constructor(config, data, templateElement, handleCardClick, handleCardDelet) {
+  constructor(
+    config,
+    data,
+    templateElement,
+    handleCardClick,
+    handleCardDelete,
+    users,
+    handleLike,
+    handleUnlike
+  ) {
     this._config = config;
-    this._isLiked = data.isLiked;
+    this._handleLike = handleLike;
     this._title = data.name;
     this._imageLink = data.link;
-    this._id = data.id;
+    this._owner = data.owner._id;
+    this._likes = data.likes;
     this._templateElement = templateElement;
     this._handleCardClick = handleCardClick;
-    this._handleCardDelet = handleCardDelet
+    this._handleCardDelete = handleCardDelete;
+    this._handleUnlike = handleUnlike;
+    this._users = users;
   }
 
   _getTemplate() {
@@ -21,22 +31,61 @@ export class Card {
     return cardElement;
   }
 
-  _handleDelete = (e) => {
-    e.currentTarget.parentNode.remove();
+  async _setLikeCounter() {
+    const likeslength = await this._likes.length;
+    const likeElement = this._element.querySelector(this._config.card.likeLength);
 
-    initialCards.splice(this, 1);
-  };
+    if (likeElement) {
+      likeElement.textContent = likeslength
+    }
+  }
 
-  _handleLike = (heart) => {
-    this._isLiked = !this._isLiked;
+  async _isLiked(heart) {
+    this._setLikeCounter();
+
+    const ids = await this._users();
+    const idsLiked = this._likes.map((a) => a._id);
+
     heart.classList.toggle(this._config.buttons.like.buttonLiked);
-  };
+
+    if (idsLiked.includes(ids[0])) {
+      this._handleUnlike();
+    } else {
+      this._handleLike();
+    }
+  }
+
+  async _setLikeState(heart) {
+    this._setLikeCounter();
+
+    const ids = await this._users();
+    const idsLiked = await this._likes.map((a) => a._id);
+
+    if (idsLiked.includes(ids[0])) {
+      heart.classList.add(this._config.buttons.like.buttonLiked);
+      return
+    }
+  }
 
   _openImageModal() {
     this._handleCardClick(this._imageLink, this._title);
   }
 
-  _setEventListeners() {
+  async _validUsers() {
+    const ids = await this._users();
+    return String(ids.filter((user) => user === this._owner));
+  }
+
+  async _setEventListeners() {
+    const cardLikeButton = this._element.querySelector(
+      this._config.buttons.like.likeButton
+    );
+
+    this._setLikeState(cardLikeButton);
+
+    this._element
+      .querySelector(this._config.buttons.like.likeButton)
+      .addEventListener("click", async () => {await this._isLiked(cardLikeButton)});
 
     this._element
       .querySelector(this._config.card.cardImage)
@@ -44,18 +93,13 @@ export class Card {
 
     this._element
       .querySelector(this._config.buttons.trash.cardTrashButton)
-      .addEventListener("click", () => this._handleCardDelet());
-      // .addEventListener("click", (e) => this._handleDelete(e));
+      .addEventListener("click", async () => this._handleCardDelete());
 
-    this._element
-      .querySelector(this._config.buttons.like.likeButton)
-      .addEventListener("click", () => {
-        const cardLikeButton = this._element.querySelector(
-          this._config.buttons.like.likeButton
-        );
-
-        this._handleLike(cardLikeButton);
-      });
+    if ((await this._validUsers()) === "") {
+      this._element.querySelector(
+        this._config.buttons.trash.cardTrashButton
+      ).style.display = "none";
+    }
   }
 
   generateCard() {

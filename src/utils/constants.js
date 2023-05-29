@@ -27,7 +27,7 @@ export const initialCards = [
     isLiked: false,
   },
   {
-    name: "Parque Nacional da Vanoise ",
+    name: "Parque Nacional da Vanoise",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
     id: 4,
     isLiked: false,
@@ -40,7 +40,7 @@ export const initialCards = [
   },
 ];
 
-export const { cardsUl, cardsTemplate } = config.card;
+export const { cardsUl, cardsTemplate, sectionCard, card } = config.card;
 export const cardUl = document.querySelector(cardsUl);
 export const loading = document.querySelector(config.loading);
 export const skeletonLoading = document.querySelector(config.skeletonLoading);

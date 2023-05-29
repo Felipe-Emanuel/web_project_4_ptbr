@@ -13,11 +13,10 @@ export class PopupRemoveCard extends Popup {
 
     this._submitButton.addEventListener("click", (e) => {
       e.preventDefault();
-      
+
       this._submitCallback()
     })
 
     this.open();
   }
-
 }
