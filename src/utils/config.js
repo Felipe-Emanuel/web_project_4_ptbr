@@ -2,12 +2,13 @@ export const config = {
   loading: ".loading",
   skeletonLoading: ".skeletonLoading",
   cardsLoad: ".skeletonLoading-cards",
+  cardLoadInfo: ".card__info-load",
   user: {
     section: ".profile",
     name: ".profile__title",
     about: ".profile__subtitle",
     aboutModile: ".profile__subtitle_mobile",
-    avatar: ".profile__avatar-image"
+    avatar: ".profile__avatar-image",
   },
   card: {
     card: ".card",

@@ -4,7 +4,7 @@ import { FormValidator } from "../components/validation/Validate";
 import * as Popup from "../components/popups/index";
 import * as Layout from "../components/layout/index";
 import * as Utils from "../utils/index";
-import { cardSkeleton } from "../utils/constants";
+import { cardLoadInfo, cardSkeleton } from "../utils/constants";
 
 const users = async () => {
   const getUsers = new Api(Utils.apiOptions.createGet("users"));

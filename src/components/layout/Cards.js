@@ -44,17 +44,22 @@ export class Card {
 
   async _isLiked(heart) {
     this._setLikeCounter();
+    const cardInfoLoadElement = this._element.querySelector(
+      this._config.cardLoadInfo
+    );
+
+    heart.classList.toggle(this._config.buttons.like.buttonLiked);
+    cardInfoLoadElement.style.display = "block";
 
     const ids = await this._users();
     const idsLiked = this._likes.map((a) => a._id);
-
-    heart.classList.toggle(this._config.buttons.like.buttonLiked);
 
     if (idsLiked.includes(ids[0])) {
       this._handleUnlike();
     } else {
       this._handleLike();
     }
+    cardInfoLoadElement.style.display = "none";
   }
 
   async _setLikeState(heart) {

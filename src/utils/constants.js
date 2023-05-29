@@ -5,6 +5,7 @@ export const cardUl = document.querySelector(cardsUl);
 export const loading = document.querySelector(config.loading);
 export const skeletonLoading = document.querySelector(config.skeletonLoading);
 export const cardSkeleton = document.querySelector(config.cardsLoad);
+export const cardLoadInfo = document.querySelector(config.cardLoadInfo);
 export const addButton = document.querySelector(config.buttons.addButton);
 
 export const { submit } = config.inputs
