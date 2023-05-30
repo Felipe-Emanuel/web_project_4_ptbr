@@ -80,7 +80,8 @@ export class Card {
 
   async _validUsers() {
     const ids = await this._users();
-    return String(ids.filter((user) => user === this._owner));
+    const stringfyOwner = String(ids.filter((user) => user === this._owner));
+    return stringfyOwner
   }
 
   async _setEventListeners() {

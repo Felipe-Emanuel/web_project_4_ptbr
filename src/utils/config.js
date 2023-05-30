@@ -7,7 +7,7 @@ export const config = {
     section: ".profile",
     name: ".profile__title",
     about: ".profile__subtitle",
-    aboutModile: ".profile__subtitle_mobile",
+    aboutMobile: ".profile__subtitle_mobile",
     avatar: ".profile__avatar-image",
   },
   card: {

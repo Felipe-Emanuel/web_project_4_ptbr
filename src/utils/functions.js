@@ -36,16 +36,13 @@ let windowWidth = window.innerWidth;
 const checkWidth = () => {
   windowWidth = window.innerWidth;
 
-  windowWidth >= 648
-    ? (userAboutMobile.style.display = "none")
-    : (userAboutMobile.style.display = "flex");
+  userAboutMobile.style.display = window.innerWidth >= 648 ? "none" : "flex";
 };
 
 window.addEventListener("resize", checkWidth);
 export const removeSkeletons = () => {
   skeletonLoading.style.display = "none";
   loading.style.display = "none";
-
 
   addButton.style.display = "block";
   userAboutMobile.style.display = "flex";

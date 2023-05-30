@@ -14,27 +14,8 @@ export const apiOptions = {
     return await Promise.reject(`Error: ${res.status}`);
   },
 
-  createGet: (path) => ({
-    baseUrl: `${BASE_URL}/${path}`,
-    headers,
-    validation: apiOptions.validation,
-  }),
-
-  createWithBody: (method, path, body) => ({
-    method,
-    ...apiOptions.createGet(path),
-    body,
-    validation: apiOptions.validation,
-  }),
-
-  createDelete: (path, cardId) => ({
-    baseUrl: `${BASE_URL}/${path}/${cardId}`,
-    headers,
-    validation: apiOptions.validation,
-  }),
-
-  createPut: (path, cardId) => ({
-    baseUrl: `${BASE_URL}/${path}/${cardId}`,
+  options: () => ({
+    baseUrl: `${BASE_URL}`,
     headers,
     validation: apiOptions.validation,
   }),

@@ -4,12 +4,14 @@ import { FormValidator } from "../components/validation/Validate";
 import * as Popup from "../components/popups/index";
 import * as Layout from "../components/layout/index";
 import * as Utils from "../utils/index";
-import { cardLoadInfo, cardSkeleton } from "../utils/constants";
+import { cardSkeleton } from "../utils/constants";
+
+const api = () => new Api(Utils.apiOptions.options());
 
 const users = async () => {
-  const getUsers = new Api(Utils.apiOptions.createGet("users"));
-  const getResp = await getUsers.get();
-  const ids = await getResp.map((user) => user._id);
+  const get = api();
+  const result = await get.getUsers();
+  const ids = await result.map((user) => user._id);
 
   return ids;
 };
@@ -22,10 +24,10 @@ const handleCardClick = (link, name) => {
 
 const handleDelete = async (cardId, popup) => {
   try {
-    const deleteCard = new Api(Utils.apiOptions.createDelete("cards", cardId));
+    const deleteCard = api();
     popup.close();
 
-    await deleteCard.delete();
+    await deleteCard.deleteCards(cardId);
 
     await cardsSection();
   } catch (error) {
@@ -45,9 +47,8 @@ const handleCardDelete = (cardId) => {
 
 const handleLike = async (cardId) => {
   try {
-    const res = new Api(Utils.apiOptions.createPut("cards/likes", cardId));
-
-    return await res.put();
+    const res = new api();
+    return await res.setLike(cardId, "PUT");
   } catch (error) {
     console.error("Falha ao adicionar curtida do card: ", error);
   } finally {
@@ -57,9 +58,9 @@ const handleLike = async (cardId) => {
 
 const handleUnLike = async (cardId) => {
   try {
-    const res = new Api(Utils.apiOptions.createDelete("cards/likes", cardId));
+    const res = api();
 
-    return await res.delete();
+    return await res.setLike(cardId, "DELETE");
   } catch (error) {
     console.error("Falha ao deletar curtida do card: ", error);
   } finally {
@@ -100,8 +101,8 @@ const getCards = async () => {
   try {
     cardSkeleton.style.display = "flex";
 
-    const cards = new Api(Utils.apiOptions.createGet("cards"));
-    const results = await cards.get();
+    const cards = api();
+    const results = await cards.getCards();
     return results;
   } catch (error) {
     console.error("Falha ao resgatar os cards: ", error);
@@ -120,10 +121,9 @@ const postCards = async ({ name, link }) => {
 
     Utils.clearCardUl();
 
-    const setCards = new Api(
-      Utils.apiOptions.createWithBody("POST", "cards", newCard)
-    );
-    return await setCards.set();
+    const setCards = api();
+
+    return await setCards.setNewCard(newCard);
   } catch (error) {
     console.error("Falha ao criar novo card: ", error);
   } finally {
@@ -140,8 +140,8 @@ const userInstance = (request) => {
 
 const getUser = async () => {
   try {
-    const getUserInfo = new Api(Utils.apiOptions.createGet("users/me"));
-    const getResult = await getUserInfo.get();
+    const getUserInfo = api();
+    const getResult = await getUserInfo.getProfile();
     Utils.profileImage.src = getResult.avatar;
 
     userInstance(getResult);
@@ -156,10 +156,8 @@ const updateUser = async (popup) => {
   try {
     Utils.setSkeletons();
     const inputValues = popup.inputValues();
-    const setUserInfo = new Api(
-      Utils.apiOptions.createWithBody("PATCH", "users/me", inputValues)
-    );
-    const patchUserInfo = await setUserInfo.set();
+    const setUserInfo = api();
+    const patchUserInfo = await setUserInfo.updateProfile(inputValues);
 
     userInstance(patchUserInfo);
   } catch (error) {
@@ -171,12 +169,11 @@ const updateUser = async (popup) => {
 
 const updateImageProfile = async (popup) => {
   try {
-    const { imageUrl } = popup.inputValues();
-    const avatar = { avatar: imageUrl };
-    const setImageProfile = new Api(
-      Utils.apiOptions.createWithBody("PATCH", "users/me/avatar", avatar)
-    );
-    await setImageProfile.set();
+    const { imageProfile } = popup.inputValues();
+    const avatar = { avatar: imageProfile };
+
+    const setImageProfile = api();
+    await setImageProfile.updateAvatar(avatar);
   } catch (error) {
     console.error("Falha ao atualizar imagem de perfil do usuário: ", error);
   } finally {

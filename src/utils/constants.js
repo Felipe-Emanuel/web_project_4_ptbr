@@ -17,7 +17,7 @@ const { user } = config;
 export const userInfo = {
   userName: user.name,
   userAbout: user.about,
-  userAboutMobile: user.aboutModile,
+  userAboutMobile: user.aboutMobile,
   avatar: user.avatar,
 };
 
