@@ -10,6 +10,9 @@ Este projeto desenvolve uma página interativa onde o usuário poderá adicionar
 ### Link para o Projeto
 
 * [Link para o projeto](https://felipe-emanuel.github.io/web_project_4_ptbr/)
+* [Link para o projeto desenvolvido com ReactJs](https://felipe-emanuel.github.io/around-react_ptbr/)
+* [Link para o repositório desenvolvido com ReactJs](https://github.com/Felipe-Emanuel/around-react_ptbr/tree/main#readme)
+
 
 ### Principais Stacks:
 > - <img align="center" alt="HTML5" height="15" width="15" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"/> <a href="https://www.w3schools.com/html/">HTML5</a>
